@@ -135,21 +135,21 @@ extension HomeViewController: ExpandingTransitionSourceDelegate {
         return bounds
     }
     
-    func transitionSourceWillBegin() {
-        let selectedCell = tableView.cellForRow(at: selectedIndex) as! ImageTableViewCell
-        selectedCell.featureImage.isHidden = true
-    }
     
-    func transitionSourceDidEnd() {
+    func transitionSourceEvent(event: ExpandingCellTransitionEvent) {
         let selectedCell = tableView.cellForRow(at: selectedIndex) as! ImageTableViewCell
-        selectedCell.featureImage.isHidden = false
+        switch event {
+        case .willBegin:
+            selectedCell.featureImage.isHidden = true
+            break
+        case .didCancel:
+            selectedCell.featureImage.isHidden = false
+            break
+        case .didEnd:
+            selectedCell.featureImage.isHidden = false
+            break
+        }
     }
-    
-    func transitionSourceDidCancel() {
-        let selectedCell = tableView.cellForRow(at: selectedIndex) as! ImageTableViewCell
-        selectedCell.featureImage.isHidden = false
-    }
-    
     
     func transitionTopSection() -> UIImageView? {
         
@@ -179,7 +179,7 @@ extension HomeViewController: ExpandingTransitionSourceDelegate {
     func transitionMiddleSection() -> UIImageView? {
         // Create a snapshot of the title area below the feature image in the cell
         let cell = tableView.cellForRow(at: selectedIndex)! as! ImageTableViewCell
-        var bounds = cell.bottomView.convert(cell.titleArea.bounds, to: view)
+        var bounds = cell.titleArea.convert(cell.titleArea.bounds, to: view)
         
         if bounds.origin.y > view.bounds.height {
             // If the title area is off-screen, no snapshot is required

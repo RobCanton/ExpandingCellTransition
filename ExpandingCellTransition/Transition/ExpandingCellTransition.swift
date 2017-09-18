@@ -8,6 +8,10 @@
 
 import UIKit
 
+public enum ExpandingCellTransitionEvent {
+    case willBegin, didEnd, didCancel
+}
+
 public final class ExpandingCellTransition: NSObject {
     
     var source: ExpandingTransitionSourceDelegate
@@ -95,8 +99,8 @@ extension ExpandingCellTransition: UIViewControllerAnimatedTransitioning {
         
         destinationView.frame = CGRect(x: 0, y: transitioningImageView.frame.origin.y, width: destinationView.frame.width, height: destinationView.frame.height)
         
-        source.transitionSourceWillBegin?()
-        destination.transitionDestinationWillBegin?()
+        source.transitionSourceEvent(event: .willBegin)
+        destination.transitionDestinationEvent(event: .willBegin)
         
         UIView.animate(
             withDuration: transitionDuration/2,
@@ -149,8 +153,8 @@ extension ExpandingCellTransition: UIViewControllerAnimatedTransitioning {
                 transitioningImageView.alpha = 0.0
                 transitioningImageView.removeFromSuperview()
                 
-                self.source.transitionSourceDidEnd?()
-                self.destination.transitionDestinationDidEnd?()
+                self.source.transitionSourceEvent(event: .didEnd)
+                self.destination.transitionDestinationEvent(event: .didEnd)
 
                 transitionContext.completeTransition(true)
             })
@@ -189,8 +193,8 @@ extension ExpandingCellTransition: UIViewControllerAnimatedTransitioning {
                     transitioningImageView.alpha = 0.0
                     transitioningImageView.removeFromSuperview()
                     
-                    self.source.transitionSourceDidEnd?()
-                    self.destination.transitionDestinationDidEnd?()
+                    self.source.transitionSourceEvent(event: .didEnd)
+                    self.destination.transitionDestinationEvent(event: .didEnd)
                     
                     transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             })
@@ -253,8 +257,8 @@ extension ExpandingCellTransition: UIViewControllerAnimatedTransitioning {
             containerView.addSubview(midSection!)
         }
         
-        source.transitionSourceWillBegin?()
-        destination.transitionDestinationWillBegin?()
+        self.source.transitionSourceEvent(event: .willBegin)
+        self.destination.transitionDestinationEvent(event: .willBegin)
 
         if transitioningImageView.frame.maxY < 0.0 {
             transitioningImageView.frame.origin.y = -transitioningImageView.frame.height
@@ -312,8 +316,8 @@ extension ExpandingCellTransition: UIViewControllerAnimatedTransitioning {
                 sourceView.alpha = 1.0
                 transitioningImageView.removeFromSuperview()
                 
-                self.source.transitionSourceDidEnd?()
-                self.destination.transitionDestinationDidEnd?()
+                self.source.transitionSourceEvent(event: .didEnd)
+                self.destination.transitionDestinationEvent(event: .didEnd)
 
                 transitionContext.completeTransition(true)
             })
@@ -354,8 +358,8 @@ extension ExpandingCellTransition: UIViewControllerAnimatedTransitioning {
                     sourceView.alpha = 1.0
                     transitioningImageView.removeFromSuperview()
                     
-                    self.source.transitionSourceDidEnd?()
-                    self.destination.transitionDestinationDidEnd?()
+                    self.source.transitionSourceEvent(event: .didEnd)
+                    self.destination.transitionDestinationEvent(event: .didEnd)
 
                     transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             })

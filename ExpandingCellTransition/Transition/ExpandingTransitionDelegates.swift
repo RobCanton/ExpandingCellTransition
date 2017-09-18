@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public protocol ExpandingTransitionSourceDelegate: NSObjectProtocol {
+public protocol ExpandingTransitionSourceDelegate: NSObjectProtocol {
 
     func transitionDuration() -> TimeInterval
     func transitionSourceImageView() -> UIImageView
@@ -17,17 +17,13 @@ import UIKit
     func transitionTopSection() -> UIImageView?
     func transitionBottomSection() -> UIImageView?
     func transitionMiddleSection() -> UIImageView?
-
-    @objc optional func transitionSourceWillBegin()
-    @objc optional func transitionSourceDidEnd()
-    @objc optional func transitionSourceDidCancel()
+    
+    func transitionSourceEvent(event: ExpandingCellTransitionEvent) ->Void
 }
 
-@objc public protocol ExpandingTransitionDestinationDelegate: NSObjectProtocol {
+public protocol ExpandingTransitionDestinationDelegate: NSObjectProtocol {
     func transitionDuration() -> TimeInterval
     func transitionDestinationImageViewFrame(forward: Bool) -> CGRect
-    
-    @objc optional func transitionDestinationWillBegin()
-    @objc optional func transitionDestinationDidEnd()
-    @objc optional func transitionDestinationDidCancel()
+    func transitionDestinationEvent(event: ExpandingCellTransitionEvent) -> Void
+
 }

@@ -157,6 +157,20 @@ extension DetailViewController: ExpandingTransitionDestinationDelegate {
         headerImageView.isHidden = false
     }
     
+    func transitionDestinationEvent(event: ExpandingCellTransitionEvent) {
+        switch event {
+        case .willBegin:
+            headerImageView.isHidden = true
+            break
+        case .didCancel:
+            headerImageView.isHidden = false
+            break
+        case .didEnd:
+            headerImageView.isHidden = false
+            break
+        }
+    }
+    
 }
 
 
