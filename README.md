@@ -28,7 +28,11 @@ See the demo project for example implementations of each method.
 
 **Set the navigation controller delegate**
 ```swift
-navigationController?.delegate = transitionDelegate
+override func viewDidLoad() {
+	super.viewDidLoad()
+    ...
+	navigationController?.delegate = transitionDelegate
+}
 ```
 
 **Implement the delegate methods**
