@@ -12,7 +12,7 @@ Copy the files in the 'Transition' folder into your project
   * ExpandingCellTransition.swift
   * ExpandingTransitionDelegates
   * Extensions.swift
-  * 
+  
   
 ### Setup the Source View Controller
 See the demo project for example implementations of each method.
