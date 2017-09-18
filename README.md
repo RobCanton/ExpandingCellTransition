@@ -32,6 +32,7 @@ override func viewDidLoad() {
 ```
 
 **Implement the source delegate methods**
+
 See the demo project for example implementations of each method.
 
 ```swift
@@ -60,6 +61,7 @@ func transitionSourceEvent(event: ExpandingCellTransitionEvent) -> Void
 ### Setup the Destination View Controller
 
 **Implement the destination delegate methods**
+
 See the demo project for example implementations of each method.
 
 ```swift
