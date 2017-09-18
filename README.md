@@ -15,7 +15,6 @@ Copy the files in the 'Transition' folder into your project
   
   
 ### Setup the Source View Controller
-See the demo project for example implementations of each method.
 
 **Add these properties**
 ```swift
@@ -33,6 +32,7 @@ override func viewDidLoad() {
 ```
 
 **Implement the source delegate methods**
+See the demo project for example implementations of each method.
 
 ```swift
 // Duration of the push transition
@@ -60,6 +60,7 @@ func transitionSourceEvent(event: ExpandingCellTransitionEvent) -> Void
 ### Setup the Destination View Controller
 
 **Implement the destination delegate methods**
+See the demo project for example implementations of each method.
 
 ```swift
 // Duration of the pop transition
