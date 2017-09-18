@@ -35,7 +35,7 @@ override func viewDidLoad() {
 }
 ```
 
-**Implement the delegate methods**
+**Implement the source delegate methods**
 
 ```swift
 func transitionDuration() -> TimeInterval
@@ -51,7 +51,7 @@ func transitionSourceEvent(event: ExpandingCellTransitionEvent) -> Void
 
 ### Setup the Destination View Controller
 
-**Implement the delegate methods**
+**Implement the destination delegate methods**
 
 ```swift
 func transitionDuration() -> TimeInterval
