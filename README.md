@@ -30,7 +30,7 @@ See the demo project for example implementations of each method.
 ```swift
 override func viewDidLoad() {
 	super.viewDidLoad()
-    ...
+	...
 	navigationController?.delegate = transitionDelegate
 }
 ```
