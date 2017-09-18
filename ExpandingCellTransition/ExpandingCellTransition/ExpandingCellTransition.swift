@@ -74,15 +74,17 @@ extension ExpandingCellTransition: UIViewControllerAnimatedTransitioning {
 
         containerView.insertSubview(destinationView, belowSubview: sourceView)
        
-        
-        if botSection != nil {
-           containerView.addSubview(botSection!)
-        }
-        
+        // Add top section if it exists
         if topSection != nil {
             containerView.addSubview(topSection!)
         }
         
+        // Add bottom section if it exists
+        if botSection != nil {
+           containerView.addSubview(botSection!)
+        }
+        
+        // Add middle section if it exists
         if midSection != nil {
             containerView.addSubview(midSection!)
         }
@@ -211,6 +213,7 @@ extension ExpandingCellTransition: UIViewControllerAnimatedTransitioning {
         destinationView.alpha = 1.0
         sourceView.alpha = 0.0
         
+        // Set the initial position of the top section off-screen
         self.topSection?.alpha = 0.0
         self.topSection?.frame = CGRect(x: 0,
                                         y: -self.topSection!.frame.height,
@@ -219,11 +222,13 @@ extension ExpandingCellTransition: UIViewControllerAnimatedTransitioning {
         
         containerView.insertSubview(sourceView, belowSubview: destinationView)
         
+        // Set the initial position of the bottom section off-screen
         self.botSection?.alpha = 0.0
         self.botSection?.frame = CGRect(x: 0,
                                 y: sourceView.frame.height + self.botSection!.frame.height,
                                 width: self.botSection!.frame.width,
                                 height: self.botSection!.frame.height)
+        
         
         let startCellFrame = self.destination.transitionDestinationImageViewFrame(forward: self.forward)
         self.midSection?.frame = CGRect(x: 0,
@@ -233,14 +238,17 @@ extension ExpandingCellTransition: UIViewControllerAnimatedTransitioning {
         self.midSection?.alpha = 0.0
         containerView.addSubview(transitioningImageView)
         
+        // Add top section if it exists
         if self.topSection != nil {
             containerView.addSubview(self.topSection!)
         }
         
+        // Add bottom section if it exists
         if self.botSection != nil {
             containerView.addSubview(self.botSection!)
         }
         
+        // Add middle section if it exists
         if midSection != nil {
             containerView.addSubview(midSection!)
         }

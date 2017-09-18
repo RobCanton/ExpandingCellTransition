@@ -79,10 +79,10 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="bottomView" destination="89n-7d-wgE" id="z0K-mq-g3l"/>
                 <outlet property="featureImage" destination="sXE-jE-fQo" id="BfF-js-ShW"/>
                 <outlet property="priceLabel" destination="TdQ-FT-fdC" id="Vcw-dx-Wqz"/>
                 <outlet property="reviewsLabel" destination="NFX-dV-4Dm" id="T5f-eH-q3Z"/>
+                <outlet property="titleArea" destination="89n-7d-wgE" id="A2B-9P-tT9"/>
                 <outlet property="titleLabel" destination="9gb-Bb-sPV" id="q4P-21-Irs"/>
             </connections>
             <point key="canvasLocation" x="79" y="179"/>

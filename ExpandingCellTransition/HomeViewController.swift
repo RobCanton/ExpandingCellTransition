@@ -9,13 +9,14 @@
 import UIKit
 
 
-class SourceViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var transitionDelegate = ExpandingNavigationControllerDelegate()
     var selectedIndex:IndexPath!
     
     @IBOutlet weak var tableView: UITableView!
     
+    // Mock data
     let homes = [
         Home(title: "Luxury Villa with Amazing Sea View", price: 360, numReviews: 24, image: "0.jpg"),
         Home(title: "Charming, Very Spacious Room with Central Location", price: 180, numReviews: 14, image: "1.jpg"),
@@ -49,13 +50,17 @@ class SourceViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.reloadData()
         view.addSubview(tableView)
         
+        // Removes navigation bar shadow
         navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // Set navigation delegate to custom transition
         navigationController?.delegate = transitionDelegate
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Show navigation bar
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -68,28 +73,35 @@ class SourceViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         let staticHeight:CGFloat = 8 + 210 + 8 + 4 + 20 + 2 + 15 + 8 + 8
-        let home = homes[indexPath.row]
-        let titleHeight = UILabel.size(withText: home.title, forWidth: tableView.frame.width - 48.0, withFont: UIFont.systemFont(ofSize: 22.0, weight: UIFont.Weight.bold)).height
+        
+        // Estimate height of the title label
+        let titleHeight = UILabel.size(withText: homes[indexPath.row].title, forWidth: tableView.frame.width - 48.0, withFont: UIFont.systemFont(ofSize: 22.0, weight: UIFont.Weight.bold)).height
+        
         return staticHeight + titleHeight
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ImageTableViewCell
+        
+        // Setup cell with home info
         let home = homes[indexPath.row]
         cell.featureImage.image = UIImage(named: home.image)!
         cell.titleLabel.text = home.title
         cell.priceLabel.text = "$\(home.price) per night"
         cell.reviewsLabel.text = "\(home.numReviews) reviews"
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath
-        let destinationController = DestinationViewController()
-        destinationController.home = homes[indexPath.row]
-        transitionDelegate.isExpandingTransitionEnabled = true
-        navigationController?.pushViewController(destinationController, animated: true)
+        
+        // Push detail view controller
+        let detailController = DetailViewController()
+        detailController.home = homes[indexPath.row]
+        navigationController?.pushViewController(detailController, animated: true)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -105,7 +117,7 @@ class SourceViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 }
 
-extension SourceViewController: ExpandingTransitionSourceDelegate {
+extension HomeViewController: ExpandingTransitionSourceDelegate {
     
     func transitionDuration() -> TimeInterval {
         return 0.42
@@ -141,6 +153,7 @@ extension SourceViewController: ExpandingTransitionSourceDelegate {
     
     func transitionTopSection() -> UIImageView? {
         
+        // Create a snapshot of the area above the selected cell
         let cell = tableView.cellForRow(at: selectedIndex)!
         let bounds = cell.convert(cell.bounds, to: view)
         let snapshot = view.snapshot(of: CGRect(x: 0,
@@ -152,7 +165,7 @@ extension SourceViewController: ExpandingTransitionSourceDelegate {
     }
     
     func transitionBottomSection() -> UIImageView? {
-        
+        // Create a snapshot of the area below the selected cell
         let cell = tableView.cellForRow(at: selectedIndex)!
         let bounds = cell.convert(cell.bounds, to: view)
         let bottomStart = bounds.origin.y + bounds.height
@@ -164,11 +177,15 @@ extension SourceViewController: ExpandingTransitionSourceDelegate {
     }
     
     func transitionMiddleSection() -> UIImageView? {
+        // Create a snapshot of the title area below the feature image in the cell
         let cell = tableView.cellForRow(at: selectedIndex)! as! ImageTableViewCell
-        var bounds = cell.bottomView.convert(cell.bottomView.bounds, to: view)
+        var bounds = cell.bottomView.convert(cell.titleArea.bounds, to: view)
+        
         if bounds.origin.y > view.bounds.height {
+            // If the title area is off-screen, no snapshot is required
             return nil
         } else if bounds.origin.y + bounds.height > view.bounds.height {
+            // If the title area is partially off-screen, adjust the frame of the snapshot
             bounds = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width, height: view.bounds.height - bounds.origin.y)
         }
 

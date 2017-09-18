@@ -10,12 +10,12 @@ import UIKit
 
 class ImageTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var bottomView: UIView!
     
     @IBOutlet weak var featureImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var reviewsLabel: UILabel!
+    @IBOutlet weak var titleArea: UIView!
     
     
     override func awakeFromNib() {

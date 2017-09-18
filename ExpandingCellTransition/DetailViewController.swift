@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DestinationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tableView:UITableView!
     var headerView:UIView!
@@ -62,12 +62,18 @@ class DestinationViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Hide navigation bar
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        // Hide close button while transitioning
         closeButton.alpha = 0.0
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // Show close button after transition
         UIView.animate(withDuration: 0.15, animations: {
             self.closeButton.alpha = 1.0
         })
@@ -88,10 +94,12 @@ class DestinationViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch (indexPath.row) {
         case 0:
+            // Estimate height of the title label
             let staticHeight:CGFloat = 20 + 8 + 22 + 8 + 20 + 8 + 8
             let titleHeight = UILabel.size(withText: home.title, forWidth: tableView.frame.width - 48.0, withFont: UIFont.systemFont(ofSize: 30.0, weight: UIFont.Weight.bold)).height
             return staticHeight + titleHeight
         case 1:
+            // Estimate height of the description label
             return 20 + UILabel.size(withText: defaultDescription, forWidth: tableView.frame.width - 48.0, withFont: UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)).height
         default:
             return 0
@@ -115,12 +123,12 @@ class DestinationViewController: UIViewController, UITableViewDelegate, UITableV
     
     override var prefersStatusBarHidden: Bool {
         get {
-            return true
+            return UIScreen.main.nativeBounds.height != 2436 // Hide status bar if device is not an iPhone X
         }
     }
 }
 
-extension DestinationViewController: ExpandingTransitionDestinationDelegate {
+extension DetailViewController: ExpandingTransitionDestinationDelegate {
     
     func transitionDuration() -> TimeInterval {
         return 0.42
@@ -130,14 +138,13 @@ extension DestinationViewController: ExpandingTransitionDestinationDelegate {
         let largeImageView = headerImageView!
         let bounds = largeImageView.convert(largeImageView.bounds, to: view)
         if forward {
-            return CGRect(x: 0, y: 0, width: view.frame.width, height: bounds.height)
+            return CGRect(x: 0, y: topLayoutGuide.length, width: view.frame.width, height: bounds.height)
         } else {
             return bounds
         }
     }
     
     func transitionDestinationWillBegin() {
-
         headerImageView.isHidden = true
     }
     
@@ -148,8 +155,6 @@ extension DestinationViewController: ExpandingTransitionDestinationDelegate {
     func transitionDestinationDidCancel() {
         headerImageView.isHidden = false
     }
-    
-    
     
 }
 
