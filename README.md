@@ -7,15 +7,12 @@ A custom transition animation where the selected image cell expands into the det
 ## Getting Started
 
 ### Install
-1. Manual
 Copy the files in the 'Transition' folder into your project
   * ExpandingNavigationControllerDelegate.swift
   * ExpandingCellTransition.swift
   * ExpandingTransitionDelegates
   * Extensions.swift
-  
- 2. Cocoapods (Coming Soon)
-
+  * 
   
 ### Setup the Source View Controller
 See the demo project for example implementations of each method.
