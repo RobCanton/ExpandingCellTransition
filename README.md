@@ -16,4 +16,10 @@ Copy the files in the 'Transition' folder into your project
   
  2. Cocoapods (Coming Soon)
   
-### Implement Delegate Functions
+### Setup the Transition
+
+**Preferred:**
+```swift
+ var transitionDelegate = ExpandingNavigationControllerDelegate()
+ var selectedIndex:IndexPath!
+```
