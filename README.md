@@ -44,11 +44,17 @@ func transitionSourceImageView() -> UIImageView
 // The frame of the imageView in the selected cell
 func transitionSourceImageViewFrame(forward: Bool) -> CGRect
 
-func transitionTopSection() -> UIImageView? // A snapshot of the area above the selected cell
-func transitionBottomSection() -> UIImageView? // A snapshot of the area below the selected cell
-func transitionMiddleSection() -> UIImageView? // A snapshot of the title area below the imageView in the cell
+// A snapshot of the area above the selected cell
+func transitionTopSection() -> UIImageView?
 
-func transitionSourceEvent(event: ExpandingCellTransitionEvent) -> Void // Called when the transiton begins, ends, and is cancelled
+// A snapshot of the area below the selected cell
+func transitionBottomSection() -> UIImageView?
+
+// A snapshot of the title area below the imageView in the cell
+func transitionMiddleSection() -> UIImageView?
+
+// Called when the transiton begins, ends, and is cancelled
+func transitionSourceEvent(event: ExpandingCellTransitionEvent) -> Void
 ```
 
 ### Setup the Destination View Controller
@@ -56,7 +62,12 @@ func transitionSourceEvent(event: ExpandingCellTransitionEvent) -> Void // Calle
 **Implement the destination delegate methods**
 
 ```swift
-func transitionDuration() -> TimeInterval // Duration of the pop transition
-func transitionDestinationImageViewFrame(forward: Bool) -> CGRect // The imageView in the header
-func transitionDestinationEvent(event: ExpandingCellTransitionEvent) -> Void // Called when the transiton begins, ends, and is cancelled
+// Duration of the pop transition
+func transitionDuration() -> TimeInterval
+
+// The imageView in the header
+func transitionDestinationImageViewFrame(forward: Bool) -> CGRect
+
+// Called when the transiton begins, ends, and is cancelled
+func transitionDestinationEvent(event: ExpandingCellTransitionEvent) -> Void
 ```
