@@ -68,7 +68,7 @@ See the demo project for example implementations of each method.
 // Duration of the pop transition
 func transitionDuration() -> TimeInterval
 
-// The imageView in the header
+// The frame of the imageView in the header
 func transitionDestinationImageViewFrame(forward: Bool) -> CGRect
 
 // Called when the transiton begins, ends, and is cancelled
