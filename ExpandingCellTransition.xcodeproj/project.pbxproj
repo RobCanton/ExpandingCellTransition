@@ -92,20 +92,20 @@
 				B0A25EF31F6D992D007E13EA /* Assets.xcassets */,
 				B0A25EF51F6D992E007E13EA /* LaunchScreen.storyboard */,
 				B0A25EF81F6D992F007E13EA /* Info.plist */,
-				B00C67321F6F812200FAD09C /* Extensions.swift */,
-				B0A25EFE1F6D9956007E13EA /* ExpandingCellTransition */,
+				B0A25EFE1F6D9956007E13EA /* Transition */,
 			);
 			path = ExpandingCellTransition;
 			sourceTree = "<group>";
 		};
-		B0A25EFE1F6D9956007E13EA /* ExpandingCellTransition */ = {
+		B0A25EFE1F6D9956007E13EA /* Transition */ = {
 			isa = PBXGroup;
 			children = (
 				B0A25F011F6D9968007E13EA /* ExpandingNavigationControllerDelegate.swift */,
 				B0A25F031F6D9968007E13EA /* ExpandingCellTransition.swift */,
 				B0A25F041F6D9968007E13EA /* ExpandingTransitionDelegates.swift */,
+				B00C67321F6F812200FAD09C /* Extensions.swift */,
 			);
-			path = ExpandingCellTransition;
+			path = Transition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
