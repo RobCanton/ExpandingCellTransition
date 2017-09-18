@@ -35,9 +35,14 @@ override func viewDidLoad() {
 **Implement the source delegate methods**
 
 ```swift
-func transitionDuration() -> TimeInterval // Duration of the push transition
-func transitionSourceImageView() -> UIImageView // The imageView in the selected cell
-func transitionSourceImageViewFrame(forward: Bool) -> CGRect // The frame of the imageView in the selected cell
+// Duration of the push transition
+func transitionDuration() -> TimeInterval
+
+// The imageView in the selected cell
+func transitionSourceImageView() -> UIImageView
+
+// The frame of the imageView in the selected cell
+func transitionSourceImageViewFrame(forward: Bool) -> CGRect
 
 func transitionTopSection() -> UIImageView? // A snapshot of the area above the selected cell
 func transitionBottomSection() -> UIImageView? // A snapshot of the area below the selected cell
